@@ -3,12 +3,14 @@ import axios from 'axios';
 import ImgCard from './components/imgCard';
 import DateCard from './components/dateCard';
 import TitleCard from './components/titleCard';
+import DescriptionCard from './components/descriptionCard';
 import "./App.css";
 
 function App() {
   const [img, setImg] = useState([]);
   const [date, setDate] = useState([]);
   const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
 
   useEffect (() => {
     axios
@@ -17,9 +19,11 @@ function App() {
         console.log(response.data);
         console.log(response.data.url);
         console.log(response.data.title);
+        console.log(response.data.explanation);
         setImg(response.data.url);
         setDate(response.data.date);
         setTitle(response.data.title);
+        setDescription(response.data.explanation);
       })
       .catch(error => {
         console.log('Whoops!  The data was not returned', error);
@@ -31,6 +35,7 @@ function App() {
       <TitleCard title = {title}/>
       <DateCard date = {date}/>
       <ImgCard img = {img}/>
+      <DescriptionCard explanation = {description}/>
     </div>
   );
 }
