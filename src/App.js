@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import ImgCard from './components/imgCard';
 import DateCard from './components/dateCard';
+import TitleCard from './components/titleCard';
 import "./App.css";
 
 function App() {
+  const [img, setImg] = useState([]);
+  const [date, setDate] = useState([]);
+  const [title, setTitle] = useState([]);
+
+  useEffect (() => {
+    axios
+      .get(`https://api.nasa.gov/planetary/apod?api_key=5OoBFtavGzIHbKDwYcHN9SfX1eZYMHLTEY2aBdQQ`)
+      .then(response => {
+        console.log(response.data);
+        console.log(response.data.url);
+        console.log(response.data.title);
+        setImg(response.data.url);
+        setDate(response.data.date);
+        setTitle(response.data.title);
+      })
+      .catch(error => {
+        console.log('Whoops!  The data was not returned', error);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <DateCard />
-      <ImgCard />
+      <TitleCard title = {title}/>
+      <DateCard date = {date}/>
+      <ImgCard img = {img}/>
     </div>
   );
 }
