@@ -4,6 +4,7 @@ import ImgCard from './components/imgCard';
 import DateCard from './components/dateCard';
 import TitleCard from './components/titleCard';
 import DescriptionCard from './components/descriptionCard';
+import ReactNav from './components/reactNav';
 import "./App.css";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="App">
+      <ReactNav />
       <TitleCard title = {title}/>
       <DateCard date = {date}/>
       <ImgCard img = {img}/>
